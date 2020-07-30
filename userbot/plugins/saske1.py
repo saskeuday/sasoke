@@ -20,7 +20,7 @@ USER_BOT_NO_WARN = ("\n╔══╗ \n║██║ \n║(O)║ ♫ ♪ ♫ ♪ \
                     "**حاليااً ѕᴀѕᴋᴇ ʟ̤ɾʅ丂ɹɹɹȊɹɹɹ**\n"
                     f"{DEFAULTUSER} مشغول ! لذا من الافضل عدم ارسال الرسائل المزعجة 🌝🌿!\n\n"
                     f"{CUSTOM_MIDDLE_PMP} \n\n"
-                    "**الآن أنت في ورطة لذا أرسل\n** 🍁 `/start` 🍁  **\nلبدء محادثة صالحة!!**")
+                    "**الآن أنت في ورطة لذا أرسل\n** 🍁 `start` 🍁  **\nلبدء محادثة صالحة!!**")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
@@ -150,7 +150,7 @@ if Var.PRIVATE_GROUP_ID is not None:
 
             return
           
-        if any([x in event.raw_text for x in ("start","Start", "1", "2", "3", "4", "5")]):
+        if any([x in event.raw_text for x in ("start", "1", "2", "3", "4", "5")]):
             return
 
         if not pmpermit_sql.is_approved(chat_id):
