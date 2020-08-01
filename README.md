@@ -33,7 +33,7 @@ Best User Bot To Manage Your Telegram Account
 
 Simply clone the repository and run the main file:
 ```sh
-git clone https://github.com/starkGang/Fridayuserbot
+git clone https://github.com/saskeuday/sasoke
 cd Userbot
 virtualenv -p /usr/bin/python3 venv
 . ./venv/bin/activate
