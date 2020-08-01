@@ -15,5 +15,6 @@ async def amireallyalive(alive):
                      "`Telethon version: 6.9.0\nPython: 3.7.3\n`"
                      # Don't change this else you a TikTok loser, Son of Jinping. Add your own.
                      "`Bot created by:` [ʟ̤ɾʅ丂ɹɹɹȊɹɹɹ](tg://user?id=367810114), @SASKE_89\n"
-                     f"`My peru owner`: {DEFAULTUSER}\n\n"
+                     f"`My peru owner`: {DEFAULTUSER}\n"
+                     "**•Link Github :** [Click here](https://github.com/saskeuday/sasoke)\n\n"
                      "• َ𝒊 𝒍𝒐𝒗𝒆 𝒉𝒐𝒏𝒆𝒚 𝒔𝒐 𝒎𝒖𝒄𝒉 | 🍓🍯✨")
