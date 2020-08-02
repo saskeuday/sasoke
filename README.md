@@ -26,7 +26,7 @@ Best User Bot To Manage Your Telegram Account
 
 ## GET STRING SESSION FROM REPL RUN 
 
-[![Run on Repl.it](https://repl.it/badge/github/STARKGANG/friday)](https://friday.starkgang.repl.run)
+[![Repl.it](https://img.shields.io/badge/REPL%20RUN-Run%20Online-blue.svg)](https://friday.starkgang.repl.run)
 
 
 ### The Normal Way
