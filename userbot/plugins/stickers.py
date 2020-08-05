@@ -42,7 +42,7 @@ async def _(event):
         await event.edit("Reply to a photo to add to my personal sticker pack.")
         return
     reply_message = await event.get_reply_message()
-    sticker_emoji = "🤔"
+    sticker_emoji = "😎"
     input_str = event.pattern_match.group(1)
     if input_str:
         sticker_emoji = input_str
@@ -406,3 +406,4 @@ def zipdir(path, ziph):
         for file in files:
             ziph.write(os.path.join(root, file))
             os.remove(os.path.join(root, file))
+80
