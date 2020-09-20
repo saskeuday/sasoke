@@ -17,7 +17,7 @@ from youtube_dl.utils import (DownloadError, ContentTooShortError,
                               UnavailableVideoError, XAttrMetadataError)
 from asyncio import sleep
 from telethon.tl.types import DocumentAttributeAudio
-from uniborg.util import admin_cmd, sudo_cmd, edit_or_reply
+from uniborg.util import admin_cmd
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
     """Generic progress_callback for uploads and downloads."""
@@ -77,13 +77,12 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 @borg.on(admin_cmd(pattern="yt(a|v) (.*)"))
-@borg.on(sudo_cmd(pattern="yt(a|v) (.*)", allow_sudo=True))
 async def download_video(v_url):
     """ For .ytdl command, download media from YouTube and many other sites. """
     url = v_url.pattern_match.group(2)
     type = v_url.pattern_match.group(1).lower()
-    friday = await edit_or_reply(v_url, "Trying To Download......")
-    await friday.edit("`Preparing to download...`")
+
+    await v_url.edit("`Preparing to download...`")
 
     if type == "a":
         opts = {
@@ -145,41 +144,41 @@ async def download_video(v_url):
         video = True
 
     try:
-        await friday.edit("`Fetching data, please wait..`")
+        await v_url.edit("`Fetching data, please wait..`")
         with YoutubeDL(opts) as ytdl:
             ytdl_data = ytdl.extract_info(url)
     except DownloadError as DE:
-        await friday.edit(f"`{str(DE)}`")
+        await v_url.edit(f"`{str(DE)}`")
         return
     except ContentTooShortError:
-        await friday.edit("`The download content was too short.`")
+        await v_url.edit("`The download content was too short.`")
         return
     except GeoRestrictedError:
-        await friday.edit(
+        await v_url.edit(
             "`Video is not available from your geographic location due to geographic restrictions imposed by a website.`"
         )
         return
     except MaxDownloadsReached:
-        await friday.edit("`Max-downloads limit has been reached.`")
+        await v_url.edit("`Max-downloads limit has been reached.`")
         return
     except PostProcessingError:
-        await friday.edit("`There was an error during post processing.`")
+        await v_url.edit("`There was an error during post processing.`")
         return
     except UnavailableVideoError:
-        await friday.edit("`Media is not available in the requested format.`")
+        await v_url.edit("`Media is not available in the requested format.`")
         return
     except XAttrMetadataError as XAME:
-        await friday.edit(f"`{XAME.code}: {XAME.msg}\n{XAME.reason}`")
+        await v_url.edit(f"`{XAME.code}: {XAME.msg}\n{XAME.reason}`")
         return
     except ExtractorError:
-        await friday.edit("`There was an error during info extraction.`")
+        await v_url.edit("`There was an error during info extraction.`")
         return
     except Exception as e:
-        await friday.edit(f"{str(type(e)): {str(e)}}")
+        await v_url.edit(f"{str(type(e)): {str(e)}}")
         return
     c_time = time.time()
     if song:
-        await friday.edit(f"`Preparing to upload song:`\
+        await v_url.edit(f"`Preparing to upload song:`\
         \n**{ytdl_data['title']}**\
         \nby *{ytdl_data['uploader']}*")
         await v_url.client.send_file(
@@ -198,7 +197,7 @@ async def download_video(v_url):
         os.remove(f"{ytdl_data['id']}.mp3")
         await v_url.delete()
     elif video:
-        await friday.edit(f"`Preparing to upload video:`\
+        await v_url.edit(f"`Preparing to upload video:`\
         \n**{ytdl_data['title']}**\
         \nby *{ytdl_data['uploader']}*")
         await v_url.client.send_file(
@@ -212,4 +211,3 @@ async def download_video(v_url):
                          f"{ytdl_data['title']}.mp4")))
         os.remove(f"{ytdl_data['id']}.mp4")
         await v_url.delete()
-        
