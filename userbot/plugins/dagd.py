@@ -6,42 +6,37 @@ Available Commands:
 .unshort <short url>"""
 import requests
 
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd("dns (.*)"))
-@borg.on(sudo_cmd("dns (.*)", allow_sudo=True))
 async def _(event):
-    starky = await edit_or_reply(event, "Processing.....")
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
     sample_url = "https://da.gd/dns/{}".format(input_str)
     response_api = requests.get(sample_url).text
     if response_api:
-        await starky.edit("DNS records of {} are \n{}".format(input_str, response_api))
+        await event.edit("DNS records of {} are \n{}".format(input_str, response_api))
     else:
-        await starky.edit("i can't seem to find {} on the internet".format(input_str))
+        await event.edit("i can't seem to find {} on the internet".format(input_str))
 
 
 @borg.on(admin_cmd("url (.*)"))
-@borg.on(sudo_cmd("dns (.*)", allow_sudo=True))
 async def _(event):
-    starkxd = await edit_or_reply(event, "Processing....")
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
     sample_url = "https://da.gd/s?url={}".format(input_str)
     response_api = requests.get(sample_url).text
     if response_api:
-        await starkxd.edit("Generated {} for {}.".format(response_api, input_str))
+        await event.edit("Generated {} for {}.".format(response_api, input_str))
     else:
-        await starkxd.edit("something is wrong. please try again later.")
+        await event.edit("something is wrong. please try again later.")
 
 
 @borg.on(admin_cmd("unshort (.*)"))
 async def _(event):
-    sadness = await edit_or_reply(event, "Processing...")
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
@@ -49,10 +44,10 @@ async def _(event):
         input_str = "http://" + input_str
     r = requests.get(input_str, allow_redirects=False)
     if str(r.status_code).startswith("3"):
-        await sadness.edit(
+        await event.edit(
             "Input URL: {}\nReDirected URL: {}".format(input_str, r.headers["Location"])
         )
     else:
-        await sadness.edit(
+        await event.edit(
             "Input URL {} returned status_code {}".format(input_str, r.status_code)
         )
