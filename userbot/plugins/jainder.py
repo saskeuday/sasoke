@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from telethon import events
 import random
-import asyncio
-from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern=r"jainder(.*)"))
+from telethon import events
+
+
+@borg.on(events.NewMessage(pattern=r"\.jainder(.*)", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -86,7 +86,7 @@ async def _(event):
             "-ᄒᴥᄒ-",
             "◖⚆ᴥ⚆◗",
         ]
-    else:    
+    else:
         emoticons = [
             "( ͡° ͜ʖ ͡°)",
             "¯\_(ツ)_/¯",

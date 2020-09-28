@@ -4,16 +4,12 @@ Available Commands:
 
 .padmin"""
 
-from telethon import events
-
 import asyncio
 
-from uniborg.util import admin_cmd
+from telethon import events
 
 
-
-@borg.on(admin_cmd(pattern=r"padmin"))
-
+@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
 async def _(event):
 
     if event.fwd_from:
@@ -23,11 +19,14 @@ async def _(event):
     animation_interval = 1
 
     animation_ttl = range(0, 20)
-    
-    await event.edit("Promoting")
 
-    animation_chars = [
-        
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "padmin":
+
+        await event.edit(input_str)
+
+        animation_chars = [
             "**Promoting User As Admin...**",
             "**Enabling All Permissions To User...**",
             "**(1) Send Messages: ☑️**",
@@ -35,7 +34,7 @@ async def _(event):
             "**(2) Send Media: ☑️**",
             "**(2) Send Media: ✅**",
             "**(3) Send Stickers & GIFs: ☑️**",
-            "**(3) Send Stickers & GIFs: ✅**",    
+            "**(3) Send Stickers & GIFs: ✅**",
             "**(4) Send Polls: ☑️**",
             "**(4) Send Polls: ✅**",
             "**(5) Embed Links: ☑️**",
@@ -47,12 +46,11 @@ async def _(event):
             "**(8) Change Chat Info: ☑️**",
             "**(8) Change Chat Info: ✅**",
             "**Permission Granted Successfully**",
-            "**pRoMooTeD SuCcEsSfUlLy bY: @pureindialover**"
+            "**Congo ! You Are An Admin ! Give Party Else Gey**",
+        ]
 
- ]
+        for i in animation_ttl:
 
-    for i in animation_ttl:
+            await asyncio.sleep(animation_interval)
 
-        await asyncio.sleep(animation_interval)
-
-        await event.edit(animation_chars[i % 20])
+            await event.edit(animation_chars[i % 20])
