@@ -5,10 +5,12 @@ Available Commands:
 
 import emoji
 from googletrans import Translator
-from userbot.utils import admin_cmd
+
+from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @borg.on(admin_cmd("tr ?(.*)"))
+@borg.on(sudo_cmd("tr ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -23,7 +25,7 @@ async def _(event):
     elif "|" in input_str:
         lan, text = input_str.split("|")
     else:
-        await event.edit("`.tr LanguageCode` as reply to a message")
+        await edit_or_reply(event, "`.tr LanguageCode` as reply to a message")
         return
     text = emoji.demojize(text.strip())
     lan = lan.strip()
@@ -37,10 +39,8 @@ async def _(event):
          Source **( {} )**
          Translation **( {} )**
          {}""".format(
-            translated.src,
-            lan,
-            after_tr_text
+            translated.src, lan, after_tr_text
         )
-        await event.edit(output_str)
+        await edit_or_reply(event, output_str)
     except Exception as exc:
-        await event.edit(str(exc))
+        await edit_or_reply(event, str(exc))
