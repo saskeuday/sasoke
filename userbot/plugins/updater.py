@@ -18,7 +18,7 @@ IS_SELECTED_DIFFERENT_BRANCH = (
     "in this case, Updater is unable to identify the branch to be updated."
     "please check out to an official branch, and re-start the updater."
 )
-OFFICIAL_UPSTREAM_REPO = "https://github.com/Starkgang/FridayUserbot"
+OFFICIAL_UPSTREAM_REPO = "https://github.com/saskeuday/sasoke"
 BOT_IS_UP_TO_DATE = "`The userbot is up-to-date.\nThank you for Using this Service.`"
 NEW_BOT_UP_DATE_FOUND = (
     "new update found for {branch_name}\n" "changelog: \n\n{changelog}\n" "updating ..."
@@ -138,7 +138,7 @@ def generate_change_log(git_repo, diff_marker):
 async def deploy_start(tgbot, message, refspec, remote):
     await message.edit(RESTARTING_APP)
     await message.edit(
-        "Updation Sucessfull ! Now Restarting To Finish This Process. Try `.alive` To Check If I Am Alive \n© @FRIDAYOT"
+        "Updation Sucessfull ! Now Restarting To Finish This Process. Try `.alive` To Check If I Am Alive \n© @SASKE_89"
     )
     await remote.push(refspec=refspec)
     await tgbot.disconnect()
